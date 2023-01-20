@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# exit on error inside any functions or subshells.
-set -e 
 # do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
 set -o nounset
 
