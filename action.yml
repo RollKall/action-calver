@@ -7,9 +7,11 @@ inputs:
     default: 'RollKall'
   repository:
     description: 'The name of the repository.'
+    required: true
     default: ${{ github.event.repository.name }}
   token:
     description: 'Authentication to github api.'
+    required: true
     default: ${{ secrets.GITHUB_TOKEN }}
 outputs:
   release-version:
