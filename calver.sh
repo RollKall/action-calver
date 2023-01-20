@@ -16,9 +16,6 @@ MAJOR_VERSION="${MAJOR_VERSION:-}"
 MINOR_VERSION="${MINOR_VERSION:-}"
 PATCH_VERSION="${PATCH_VERSION:-}"
 
-# GitHub 
-GITHUB_TOKEN="${GITHUB_TOKEN:-}"
-
 ### Public Functions
 #########################################################
 

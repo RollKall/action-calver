@@ -9,7 +9,7 @@ inputs:
     description: 'The name of the repository.'
     required: true
     default: ${{ github.event.repository.name }}
-  token:
+  github_token:
     description: 'Authentication to github api.'
     required: true
 outputs:
@@ -23,6 +23,6 @@ runs:
       run: |
         export ORGANIZATION=${{ inputs.owner}}
         export REPOSITORY=${{ inputs.repository }}
-        export GITHUB_TOKEN=${{ inputs.token }}
-        calver.sh
+        export GH_TOKEN=${{ inputs.github_token }}
+        ./calver.sh
       shell: bash
