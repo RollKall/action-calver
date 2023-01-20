@@ -1,0 +1,26 @@
+name: 'Release Version'
+description: 'Generate version for RollKall Applications'
+inputs:
+  owner:  # id of input
+    description: 'The account owner of the repository.'
+    required: true
+    default: 'RollKall'
+  repository:
+    description: 'The name of the repository.'
+    default: ${{ github.event.repository.name }}
+  token:
+    description: 'Authentication to github api.'
+    default: ${{ secrets.GITHUB_TOKEN }}
+outputs:
+  release-version:
+    description: "version"
+    value: ${{ steps.calver.outputs.release-version }}
+runs:
+  using: "composite"
+  steps:
+    - id: calver
+      run: |
+        export ORGANIZATION=${{ inputs.owner}}
+        export REPOSITORY=${{ inputs.repository }}
+        calver.sh
+      shell: bash

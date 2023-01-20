@@ -22,8 +22,9 @@ MAJOR_VERSION="${MAJOR_VERSION:-}"
 MINOR_VERSION="${MINOR_VERSION:-}"
 PATCH_VERSION="${PATCH_VERSION:-}"
 
-# GitHub Token
+# GitHub 
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
+GITHUB_OUTPUT="${GITHUB_OUTPUT:-}"
 
 ### Public Functions
 #########################################################
@@ -45,6 +46,7 @@ function get_release_version(){
     
     # Get Variables
     _get_release_version
+    echo "release-version=$(echo $MAJOR_VERSION.${MINOR_VERSION}.${PATCH_VERSION})" >> $GITHUB_OUTPUT
 
 }
 
