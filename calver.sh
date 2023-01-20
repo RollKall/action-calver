@@ -18,7 +18,6 @@ PATCH_VERSION="${PATCH_VERSION:-}"
 
 # GitHub 
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
-GITHUB_OUTPUT="${GITHUB_OUTPUT:-}"
 
 ### Public Functions
 #########################################################
