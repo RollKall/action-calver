@@ -12,7 +12,6 @@ inputs:
   token:
     description: 'Authentication to github api.'
     required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
 outputs:
   release-version:
     description: "version"
@@ -24,5 +23,6 @@ runs:
       run: |
         export ORGANIZATION=${{ inputs.owner}}
         export REPOSITORY=${{ inputs.repository }}
+        export GITHUB_TOKEN=${{ inputs.token }}
         calver.sh
       shell: bash
