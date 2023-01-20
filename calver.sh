@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-
-
 ### Variables
 ##############################################################################
 
