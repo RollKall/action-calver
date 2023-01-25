@@ -14,7 +14,7 @@ PATTERN='^[0-9]+$'
 # VERSION
 MAJOR_VERSION="${MAJOR_VERSION:-}"
 MINOR_VERSION="${MINOR_VERSION:-}"
-PATCH_VERSION="${PATCH_VERSION:-}"
+MICRO_VERSION="${MICRO_VERSION:-}"
 
 ### Public Functions
 #########################################################
@@ -36,7 +36,7 @@ function get_release_version(){
     
     # Get Variables
     _get_release_version
-    echo "release-version=$(echo $MAJOR_VERSION.${MINOR_VERSION}.${PATCH_VERSION})" >> $GITHUB_OUTPUT
+    echo "release-version=$(echo $MAJOR_VERSION.${MINOR_VERSION}.${MICRO_VERSION})" >> $GITHUB_OUTPUT
 
 }
 
@@ -102,50 +102,31 @@ function _get_release_version(){
         fi
     fi
 
-    # ### PATCH VERSION - read, create, update
+    # ### MICRO VERSION - read, create, update
     # #########################################################
-
-    MINOR_VERSION=$(gh api -H 'Accept: application/vnd.github+json' /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/MINOR_VERSION | jq '.value | tonumber? // .')
-
-    if ! [[ $MINOR_VERSION =~ $PATTERN ]]
-    then
-        # create
-        gh api -H 'Accept: application/vnd.github+json' /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables -f name='MINOR_VERSION' -f value=$CURRENT_MONTH
-        echo "Variable 'MINOR_VERSION' Created"
-    else 
-        if [ $MINOR_VERSION == $CURRENT_MONTH ]
-        then
-            :
-        else
-            # update
-            gh api --method PATCH -H "Accept: application/vnd.github+json" /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/MINOR_VERSION -f name='MINOR_VERSION' -f value=$CURRENT_MONTH
-            echo "Variable 'MAJOR_VERSION' updated to '$CURRENT_MONTH'"
-            RESET_COUNT=1
-        fi
-    fi
-
+ 
     if [ $RESET_COUNT -eq 1 ]
     then
-        PATCH_VERSION=0
+        MICRO_VERSION=0
     else
         # read
-        PATCH_VERSION=$(gh api -H 'Accept: application/vnd.github+json' /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/PATCH_VERSION | jq '.value | tonumber? // .')
-        if ! [[ $PATCH_VERSION =~ $PATTERN ]]
+        MICRO_VERSION=$(gh api -H 'Accept: application/vnd.github+json' /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/MICRO_VERSION | jq '.value | tonumber? // .')
+        if ! [[ $MICRO_VERSION =~ $PATTERN ]]
         then
             # create
-            gh api -H 'Accept: application/vnd.github+json' /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables -f name='PATCH_VERSION' -f value='0'
-            echo "Variable 'PATCH_VERSION' Created"
+            gh api -H 'Accept: application/vnd.github+json' /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables -f name='MICRO_VERSION' -f value='0'
+            echo "Variable 'MICRO_VERSION' Created"
             
             # end function
             return 0
         else
-            PATCH_VERSION=$(($PATCH_VERSION+1))
+            MICRO_VERSION=$(($MICRO_VERSION+1))
         fi
     fi
 
     # update
-    gh api --method PATCH -H "Accept: application/vnd.github+json" /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/PATCH_VERSION -f name='PATCH_VERSION' -f value=${PATCH_VERSION}
-    echo "Variable 'PATCH_VERSION' updated to '$PATCH_VERSION'"
+    gh api --method PATCH -H "Accept: application/vnd.github+json" /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/MICRO_VERSION -f name='MICRO_VERSION' -f value=${MICRO_VERSION}
+    echo "Variable 'MICRO_VERSION' updated to '$MICRO_VERSION'"
 
 }
 
