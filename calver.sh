@@ -36,7 +36,7 @@ function get_release_version(){
     
     # Get Variables
     _get_release_version
-    echo "release-version=$(echo $MAJOR_VERSION.${MINOR_VERSION}.${MICRO_VERSION})" >> $GITHUB_OUTPUT
+    echo "release-version=$(echo ${MAJOR_VERSION}.${MINOR_VERSION}.${MICRO_VERSION})" >> $GITHUB_OUTPUT
 
 }
 
