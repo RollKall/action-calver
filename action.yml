@@ -13,9 +13,9 @@ inputs:
     description: 'Authentication to github api.'
     required: true
 outputs:
-  release-version:
-    description: "version"
-    value: ${{ steps.calver.outputs.release-version }}
+  buildNumber:
+    description: "The version of build."
+    value: ${{ steps.calver.outputs.buildNumber }}
 runs:
   using: "composite"
   steps:
