@@ -122,7 +122,7 @@ runs:
                     # update
                     gh api --method PATCH -H "Accept: application/vnd.github+json" /repos/${ORGANIZATION}/${REPOSITORY}/actions/variables/MINOR_VERSION -f name='MINOR_VERSION' -f value=$CURRENT_MONTH
                     echo "Variable 'MINOR_VERSION' updated to '$CURRENT_MONTH'"
-                    MICRO_VERSION=$CURRENT_MONTH
+                    MINOR_VERSION=$CURRENT_MONTH
                     RESET_COUNT=1
                 fi
             fi
